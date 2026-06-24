@@ -1,0 +1,36 @@
+# Infra local do workshop-service — para dev ativo (app roda na máquina com ./mvnw spring-boot:run)
+# Para o stack completo: ver mecanica-infra-ms/local/docker-compose.full.yml
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: mecanica-workshop-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7-jammy
+    container_name: mecanica-workshop-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: workshop_service
+    volumes:
+      - mecanica-workshop-mongodb-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mecanica-workshop-mongodb-data:
