@@ -1,5 +1,8 @@
 # mecanica-workshop-service
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mecanica_workshop-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mecanica_workshop-service)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=mecanica_workshop-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=mecanica_workshop-service)
+
 > Gerencia a execução física do reparo pelo mecânico, persistindo o histórico em MongoDB (Fase 4, Grupo 14SOAT).
 
 ## Responsabilidade na Saga
