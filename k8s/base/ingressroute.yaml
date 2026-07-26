@@ -1,0 +1,18 @@
+# Prioridade 200: mais específica que a rota catch-all /api (100) do
+# monólito, que compartilha o mesmo namespace/gateway Traefik (D1).
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: workshop-service-gateway
+  labels:
+    app: workshop-service
+    tier: gateway
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/api/execucoes`)
+      priority: 200
+      services:
+        - name: workshop-service
+          port: 80
